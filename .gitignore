@@ -1,6 +1,12 @@
 lab_data/
+data_lab21/
 runs/
 TrackEval/
+.venv/
+.venv311/
+.tmp/
+.ultralytics/
+.idea/
 *.pt
 __pycache__/
 .ipynb_checkpoints/

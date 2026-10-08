@@ -103,9 +103,16 @@ def run_trackeval(trackeval_root: Path, run_name: str, benchmark: str, split: st
     Raises:
         subprocess.CalledProcessError: Khi TrackEval thoát với mã khác 0.
     """
+    trackeval_script = trackeval_root / "scripts" / "run_mot_challenge.py"
+    bootstrap = (
+        "import runpy, numpy as np; "
+        "np.float = float; np.int = int; "
+        f"runpy.run_path({str(trackeval_script)!r}, run_name='__main__')"
+    )
     cmd = [
         sys.executable,
-        str(trackeval_root / "scripts" / "run_mot_challenge.py"),
+        "-c",
+        bootstrap,
         "--GT_FOLDER", str(trackeval_root / "data" / "gt" / "mot_challenge"),
         "--TRACKERS_FOLDER", str(trackeval_root / "data" / "trackers" / "mot_challenge"),
         "--BENCHMARK", benchmark,
